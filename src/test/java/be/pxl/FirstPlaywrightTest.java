@@ -15,8 +15,8 @@ public class FirstPlaywrightTest {
 	@Test
 	public void firstTest() {
 		try (Playwright pw = Playwright.create()) { // guarantee the browser and pages will be closed in the end
-			//BrowserType.LaunchOptions launchOptions = new BrowserType.LaunchOptions().setHeadless(false);
-			Browser browser = pw.chromium().launch();
+			BrowserType.LaunchOptions launchOptions = new BrowserType.LaunchOptions().setHeadless(false);
+			Browser browser = pw.chromium().launch(launchOptions);
 			Page page = browser.newPage();
 			page.navigate("https://www.lambdatest.com/");
 			System.out.println("title " + page.title());
@@ -37,4 +37,17 @@ public class FirstPlaywrightTest {
 		}
 	}
 
+	@Test
+	public void getValue(){
+		try (Playwright pw = Playwright.create()) {
+			// BrowserType.LaunchOptions launchOptions = new BrowserType.LaunchOptions().setHeadless(false);
+			Browser browser = pw.chromium().launch();
+			Page page = browser.newPage();
+			page.navigate("http://localhost:5001/app/catalog.html");
+			// Als je begint met . dan is het een class, # is voor id
+			page.locator(".event-name").all().forEach(
+					l -> System.out.println(l.innerText())
+			);
+		}
+	}
 }

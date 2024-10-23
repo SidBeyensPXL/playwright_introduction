@@ -15,15 +15,16 @@ public class FirstPlaywrightTest {
 	@Test
 	public void firstTest() {
 		try (Playwright pw = Playwright.create()) { // guarantee the browser and pages will be closed in the end
-			BrowserType.LaunchOptions launchOptions = new BrowserType.LaunchOptions().setHeadless(false);
+			// setheadless(false) --> zichtbaar GUI, minder snel
+			// setheadless(true) --> veel sneller
+			// playwright runs in headless mode by default
+			BrowserType.LaunchOptions launchOptions = new BrowserType.LaunchOptions().setHeadless(true);
 			Browser browser = pw.chromium().launch(launchOptions);
 			Page page = browser.newPage();
 			page.navigate("https://www.lambdatest.com/");
 			System.out.println("title " + page.title());
 		}
-		// playwright runs in headless mode by default
 	}
-
 
 	@Test
 	public void differentBrowsers() {
@@ -38,9 +39,8 @@ public class FirstPlaywrightTest {
 	}
 
 	@Test
-	public void getValue(){
+	public void getAllEvents(){
 		try (Playwright pw = Playwright.create()) {
-			// BrowserType.LaunchOptions launchOptions = new BrowserType.LaunchOptions().setHeadless(false);
 			Browser browser = pw.chromium().launch();
 			Page page = browser.newPage();
 			page.navigate("http://localhost:5001/app/catalog.html");

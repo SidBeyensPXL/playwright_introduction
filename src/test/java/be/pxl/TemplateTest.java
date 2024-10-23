@@ -59,18 +59,15 @@ class TemplateTest {
 	public void testPurchaseFlow() {
 		page.navigate("http://localhost:5001/app/catalog.html");
 		page.getByTestId("purchase-button-1").click();
-		String expectedEventName = "Alexander Lemtov Live";
 		String actualEventName = page.locator("#event-name").textContent();
-		assertEquals(expectedEventName, actualEventName, "Event name should be: Alexander Lemtov Live ");
+		assertEquals("Alexander Lemtov Live", actualEventName, "Event name should be: Alexander Lemtov Live ");
 
 		page.getByTestId("quantity").selectOption("3");
 		page.getByTestId("place-order").click();
 		String actualTicketCount = page.locator("div.header-cart p span").textContent();
 		String actualTotalAmount = page.getByTestId("event-total").textContent();
-		String expectedTicketCount = "3";
-		String expectedTotalAmount = "$195.00";
-		assertEquals(expectedTicketCount, actualTicketCount, "Ticket count should be 3");
-		assertEquals(expectedTotalAmount, actualTotalAmount, "Total amount should match the expected price");
+		assertEquals("3", actualTicketCount, "Ticket count should be 3");
+		assertEquals("$195.00", actualTotalAmount, "Total amount should match the expected price");
 	}
 
 	@Test // Task 4 in de presentatie
@@ -83,11 +80,8 @@ class TemplateTest {
 		page.getByTestId("update-button").click();
 		String actualTicketCount = page.locator("div.header-cart p span").textContent();
 		String actualTotalAmount = page.getByTestId("event-total").textContent();
-		String expectedTicketCount = "4";
-		String expectedTotalAmount = "$260.00";
-		assertEquals(expectedTicketCount, actualTicketCount, "Ticket count should be 4");
-		assertEquals(expectedTotalAmount, actualTotalAmount, "Total amount should match the expected price");
 
-
+		assertEquals("4", actualTicketCount, "Ticket count should be 4");
+		assertEquals("$260.00", actualTotalAmount, "Total amount should match the expected price");
 	}
 }
